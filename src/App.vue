@@ -1,13 +1,15 @@
 <template>
   <div id="app">
     <Header></Header>
-    Postlist
+    <div :class="main">
+      <Postlist></Postlist>
+    </div>
   </div>
 </template>
 
 <script>
-import Header from "./components/Header"
-import Postlist from "./components/Postlist"
+import Header from "./components/Header";
+import Postlist from "./components/Postlist";
 
 export default {
   name: "App",
@@ -19,4 +21,8 @@ export default {
 </script>
 
 <style>
+.main {
+  width: 80%;
+  max-width: 0 auto;
+}
 </style>
