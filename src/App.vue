@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <Header></Header>
-    <div :class="main">
-      <Postlist></Postlist>
+    <div class="main">
+      <router-view name="slidebar"></router-view>
+      <router-view name="main"></router-view>
     </div>
   </div>
 </template>
@@ -21,8 +22,16 @@ export default {
 </script>
 
 <style>
+#app {
+  background-color: #e1e1e1;
+  min-height: 100vh;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
 .main {
-  width: 80%;
-  max-width: 0 auto;
+  width: 90%;
+  margin: 0 auto;
 }
 </style>
