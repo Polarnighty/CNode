@@ -1,17 +1,49 @@
 <template>
-  <div class="autherinfo">
-    <div class="authersummay">
+  <div class="authorinfo">
+    <div class="authorsummay">
       <div class="topbar">作者</div>
       <router-link
         :to="{
           name:'user_info',
-          params:{
+            params:{
             name:userinfo.loginname
-          }
-          }"
+            }
+      }"
       >
         <img :src="userinfo.avatar_url" alt />
       </router-link>
+    </div>
+    <div class="recent_topics">
+      <div class="topbar">作者最近主题</div>
+      <ul>
+        <li v-for="list in topcilimitby5">
+          <router-link
+            :to="{
+        name:'post_content',
+        params:{
+          id:list.id,
+          name:list.author.loginname
+        }
+        }"
+          >{{list.title}}</router-link>
+        </li>
+      </ul>
+    </div>
+    <div class="recent_replies">
+      <div class="topbar">作者最近回复</div>
+      <ul>
+        <li v-for="list in replylimitby5">
+          <router-link
+            :to="{
+        name:'post_content',
+        params:{
+          id:list.id,
+          name:list.author.loginname
+        }
+        }"
+          >{{list.title}}</router-link>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -39,6 +71,18 @@ export default {
         });
     }
   },
+  computed: {
+    topcilimitby5() {
+      if (this.userinfo.recent_topics) {
+        return this.userinfo.recent_topics.slice(0, 5);
+      }
+    },
+    replylimitby5() {
+      if (this.userinfo.recent_replies) {
+        return this.userinfo.recent_replies.slice(0, 5);
+      }
+    }
+  },
   beforeMount() {
     this.isLoading = true; //加载成功之前显示加载动画
     this.getData(); //在页面加载之前获取数据
@@ -47,12 +91,12 @@ export default {
 </script>
 
 <style scoped>
-.authersummay,
+.authorsummay,
 .recent_replies,
 .recent_topics {
   background-color: #fff;
 }
-.autherinfo {
+.authorinfo {
   width: 328px;
   float: right;
   margin-top: 0;
@@ -60,6 +104,7 @@ export default {
 li {
   padding: 3px 0;
 }
+
 .recent_replies ul,
 .recent_topics ul {
   margin-top: 0px;
@@ -106,3 +151,5 @@ img {
   margin-top: 0px;
 }
 </style>
+
+
