@@ -53,8 +53,6 @@
   </div>
 </template>
 
-</template>
-
 <script>
 import Pagination from "./Pagination";
 export default {
@@ -71,15 +69,15 @@ export default {
   },
   methods: {
     getData() {
-      console.log("1");
 
       this.$http
         .get("https://cnodejs.org/api/v1/topics", {
-          page: this.postpage,
-          limit: 20
+          params:{
+            page: this.postpage,
+            limit: 20
+          }
         })
         .then(res => {
-          console.log(res);
           this.loading = false; //加载成功，去除动画
           this.posts = res.data.data;
         })
@@ -88,8 +86,7 @@ export default {
           console.log(err);
         });
     },
-      renderList(value) {
-    console.log("1");
+    renderList(value) {
     this.postpage = value;
     this.getData();
   }

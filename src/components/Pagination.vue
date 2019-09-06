@@ -3,10 +3,7 @@
     <button @click="changeBtn">首页</button>
     <button @click="changeBtn">上一页</button>
     <button v-if="jduge" class="pagebtn">......</button>
-    <button
-      v-for="btn in pagebtns"
-      @click="changeBtn(btn)"
-      :class="[{currentPage:btn == currentPage},'pagebtn']"
+    <button      v-for="btn in pagebtns"      @click="changeBtn(btn)"      :class="[{currentPage:btn === currentPage},'pagebtn']"
     >{{btn}}</button>
     <button @click="changeBtn">下一页</button>
   </div>
